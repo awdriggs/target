@@ -1,6 +1,6 @@
 PVector goal;
-Point[] population = new Point[20];
-float mutationRate = 0.01;
+Point[] population = new Point[25];
+float mutationRate = 0.1;
 int pointSize = 5;
 
 void setup() {
@@ -15,7 +15,7 @@ void setup() {
     population[i] = new Point();
   }
   noCursor();
-  frameRate(20);
+  frameRate(15);
 }
 
 void draw() {
@@ -24,13 +24,14 @@ void draw() {
   /* fill(0,100); */
   /* rect(0, 0, width, height); */
   background(0);
-  stroke(255);
+  stroke(55);
   /* ellipse(goal.x, goal.y, 20, 20); */
   line(goal.x-10, goal.y, goal.x+10, goal.y);
   line(goal.x, goal.y-10, goal.x, goal.y+10);
   
   noFill();
   /* fill(255); */
+  stroke(255);
   for(int i = 0; i < population.length; i++){
     population[i].display(pointSize);
     population[i].calculateFitness(); //fitness score needed for selection
@@ -65,7 +66,6 @@ void draw() {
   }
 
   noFill();
-  stroke(50);
    /* ellipse(mouseX, mouseY, 20, 20); *1/ */
   line(mouseX-10, mouseY, mouseX+10, mouseY);
   line(mouseX, mouseY-10, mouseX, mouseY+10);
@@ -74,5 +74,8 @@ void draw() {
 
 void mouseReleased(){
   goal = new PVector(mouseX, mouseY);
-
+  
+  for(int i = 0; i < population.length; i++){
+    population[i] = new Point();
+  }
 }
